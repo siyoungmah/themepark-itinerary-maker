@@ -6,6 +6,7 @@ const app = express();
 
 // require routers
 const parksRouter = require('./routes/api.js');
+// console.log('this is what parksRouter looks like... ', parksRouter);
 
 // using Theme Parks Wiki V1 API: https://www.themeparks.wiki/
 // API documentation list: https://api.themeparks.wiki/docs/v1/ 

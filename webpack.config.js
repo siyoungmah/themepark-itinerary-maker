@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
@@ -20,5 +20,13 @@ module.exports = {
         }
       }
     ],
+  },
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    static: {
+      directory: path.join(__dirname, 'build'),
+      publicPath: '/'
+    },
   },
 }

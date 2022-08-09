@@ -1,5 +1,6 @@
-import fetch from 'node-fetch';
-const app = require('../server');
+// import fetch from 'node-fetch';
+const fetch = require('node-fetch');
+const app = require('../server.js');
 
 const parksController = {};
 
@@ -16,8 +17,12 @@ const createErr = (errInfo) => {
 // Middleware to return all parks information available in the API
 parksController.getParks = (req, res, next) => {
   fetch('https://api.themeparks.wiki/v1/destinations')
+    .then(response => response.json())
     .then(response => {
-      res.locals.parks = response.json();
+      // an object with key 'destinations', with value of an array of objects
+      // each object in the array has key: id, name, slug, parks
+      // parks is a subArray with objects
+      res.locals.parks = response;
       console.log('All the parks response: ', res.locals.parks);
       return next();
     })
@@ -27,3 +32,6 @@ parksController.getParks = (req, res, next) => {
       err,
     })));
 };
+
+// Exporting the controller!
+module.exports = parksController;
