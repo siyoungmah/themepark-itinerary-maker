@@ -28,6 +28,8 @@ const parksRouter = require('./routes/api.js');
     "externalId": "330339;entityType=theme-park"
 }
  */
+//handle parsing request body
+app.use(express.json());
 
 // handle requests for static files
 app.use(express.static('client'));
