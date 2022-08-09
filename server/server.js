@@ -29,11 +29,15 @@ const parksRouter = require('./routes/api.js');
 }
  */
 
+// handle requests for static files
+app.use(express.static('client'));
 
+// testing express set up
 app.get("/api", (req, res) => {
   return res.status(200).json({message: "Hello from server!"});
 })
 
+// use the parksRouter to handle requests to the parks API
 app.use('/parks', parksRouter);
 
 // express global error handler
