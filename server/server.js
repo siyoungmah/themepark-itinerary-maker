@@ -1,5 +1,5 @@
 // server/server.js
-
+const path = require("path");
 const express = require("express");
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -30,6 +30,8 @@ const parksRouter = require('./routes/api.js');
  */
 //handle parsing request body
 app.use(express.json());
+
+app.use('/build', express.static(path.join(__dirname, '../build')));
 
 // handle requests for static files
 app.use(express.static('client'));

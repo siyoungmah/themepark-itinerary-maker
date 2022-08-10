@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+
+import MainContainer from './containers/MainContainer.jsx';
 
 import './stylesheets/styles.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      attractionType: [],
-      attractionName: '',
-      timeOfDay: '',
-      itinerary: {},
-    }
   }
 
-  componentDidMount(){
-
+  render(){
+    <div>
+      <MainContainer />
+      <h2>I am rendered!</h2>
+    </div>
   }
 }
 
