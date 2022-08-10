@@ -6,6 +6,7 @@ module.exports = {
   entry: path.resolve(__dirname, "src/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: '/',
     filename: 'bundle.js'
   },
   module: {
@@ -37,10 +38,16 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 8080,
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
-    },
+    static: [
+      {
+        directory: path.resolve(__dirname, 'src'),
+        publicPath: '/',
+      },
+      {
+        directory: path.resolve(__dirname, "dist"),
+        publicPath: '/',
+      }
+    ],
     hot: true,
     proxy: {
       '/api/**': {
