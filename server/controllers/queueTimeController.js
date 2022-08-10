@@ -25,10 +25,18 @@ queueTimeController.getLocation = (req, res, next) => {
       // each object in rides array has key "name" with String of attractions name
     const locationsArray = [];
     // iterate through the "lands" array and push land names into locationsArray
+    // each element of "lands" array is an object with key "name" and "rides"
     for(let i = 0; i < data.lands.length; i++){
-      locationsArray.push(data.lands[i].name);
+      const { name, rides } = data.lands[i];
+      // rides returns an array of objects
+      // iterate through the array and pull out just the names of the attractions
+      const ridesNames = [];
+      for(let j = 0; j < rides.length; j++){
+        ridesNames.push(rides[j].name);
+      }
+      locationsArray.push({ name, rides: ridesNames });
     }
-    console.log('This is locationsArray, ', locationsArray);
+    // console.log('This is locationsArray, ', locationsArray);
     res.locals.locations = locationsArray;
     return next();
   }
