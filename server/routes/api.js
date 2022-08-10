@@ -1,6 +1,8 @@
 const express = require('express');
 const fetch = require('node-fetch');
 
+const queueTimeController = require('../controllers/queueTimeController.js');
+
 const router = express.Router();
 
 // helper function to create error objects
@@ -24,7 +26,6 @@ router.get('/parks',
       .then(data => data.json())
       .then((data) => {
         res.locals.parks = data;
-        console.log(data);
         return res.status(200).json(res.locals.parks);
       }
       ).catch(
@@ -33,5 +34,11 @@ router.get('/parks',
 
   }
 );
+
+router.get('/parks/:parksNum/type', 
+  queueTimeController.getLocation,
+  (req, res) => {
+    return res.status(200).json(res.locals.locations);
+  });
 
 module.exports = router;
