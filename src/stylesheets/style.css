@@ -21,10 +21,80 @@ header h1 {
   color: rgb(40, 1, 40);
   margin: auto;
   font-family: 'Patrick Hand SC', cursive, sans-serif;
-  font-size: 48px;
+  font-size: 52px;
 }
 
 main {
   flex: auto;
   /* flex-grow: 5; */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#mainContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#searchContainer {  
+  flex: 1;
+  max-width: 360px;
+  background-color: blue;
+}
+
+#itineraryContainer {
+  flex: 3;
+  background-color: red;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#searchList {
+  align-items: stretch;
+}
+
+#searchList li {
+  margin: 1em 0;
+}
+
+.dropdown-menu {
+  padding-left: 12px;
+}
+
+li > h3 {
+  text-align: center;
+}
+#itineraryBox {
+  overflow: auto;
+  margin: auto;
+  height: 50vh;
+  width: 80%;
+  background-color: rgb(227, 215, 188);
+}
+
+#wait-time-box {
+  background-color: rgb(208, 236, 208);
+  width: 80%;
+  height: 5em;
+  margin: auto;
+}
+
+#itinerary-button-container {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#add-button {
+  display: block;
+  margin: 0 auto;
 }

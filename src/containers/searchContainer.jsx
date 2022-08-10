@@ -7,14 +7,16 @@ class SearchContainer extends Component {
 
   render(){
     return (
-      <div className='searchContainer'>
-        <ul>
-          <li><h3>SEARCH</h3></li>
-          <li><label htmlFor="location-select">Location: </label></li>
-          <li><label htmlFor="ride-select">Ride: </label></li>
-          <li><label htmlFor="time-select">Time: </label></li>
-          <li>Wait time displays here</li>
-          <li><button className='add-button'> Add to Itinerary</button></li>
+      <div id='searchContainer' className='container'>
+        <ul id='searchList' className='list'>
+          <li><h3>Search</h3></li>
+          <li className='dropdown-menu'><label htmlFor="location-select">Location: </label></li>
+          <li className='dropdown-menu'><label htmlFor="ride-select">Ride: </label></li>
+          <li className='dropdown-menu'><label htmlFor="time-select">Time: </label></li>
+          <li><div id='wait-time-box'>
+                Wait time displays here!
+              </div></li>
+          <li><button id='add-button'> Add to Itinerary</button></li>
         </ul>
       </div>
     );
