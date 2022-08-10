@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import SearchContainer from './containers/searchContainer';
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -17,8 +19,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className='app'> 
-        testing to see if App is properly rendering
+      <div className='mainContainer'> 
+        <SearchContainer />
       </div>
     );
   }

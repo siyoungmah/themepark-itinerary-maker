@@ -7,7 +7,7 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <div>
+  <div className='appContainer'>
     <App />
   </div>
 )
