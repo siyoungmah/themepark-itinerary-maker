@@ -6,6 +6,7 @@ module.exports = {
   entry: path.resolve(__dirname, "src/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -45,6 +46,10 @@ module.exports = {
       '/api/**': {
         target: 'http://localhost:3000/',
         secure: false,
+        pathRewrite: { '^/api': ''},
+      },
+      '/stylesheets/**': {
+        target: 'http://localhost:3000/'
       }
     }
   },
