@@ -2,14 +2,19 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const apiRouter = require('./routes/api.js');
+
 const PORT = process.env.PORT || 3000;
 
 // handle parsing request body
 app.use(express.json());
 
-// handle requests for static files
+// handle requests for static files for css styling, index.html and bundle.js
 app.use(express.static(path.join(__dirname, "../src")));
 app.use(express.static(path.resolve(__dirname, "../dist")))
+
+
+app.use('/api', apiRouter);
 
 // global error handler
 app.use((err, req, res, next) => {
