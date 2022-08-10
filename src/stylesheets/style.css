@@ -1,3 +1,30 @@
-h1 {
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  /* flex-grow: 1; */
+  height: 120px;
+  background-color: lavender;
+  display: flex;
+}
+
+header h1 {
   color: rgb(40, 1, 40);
+  margin: auto;
+  font-family: 'Patrick Hand SC', cursive, sans-serif;
+  font-size: 48px;
+}
+
+main {
+  flex: auto;
+  /* flex-grow: 5; */
 }
