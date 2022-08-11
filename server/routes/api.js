@@ -10,8 +10,8 @@ const router = express.Router();
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo; // this is a destructuring assignment
   return {
-    log: `swapiController.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Error occurred in swapiController.${method}. Check server logs for more details.` }
+    log: `apiRouter.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: `Error occurred in apiRouter.${method}. Check server logs for more details.` }
   };
 };
 

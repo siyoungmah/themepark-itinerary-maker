@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 
 const cookieController = require('../controllers/cookieController.js');
+const dbController = require('../controllers/dbController.js')
 
 const router = express.Router();
 
@@ -20,9 +21,9 @@ router.get('/',
 });
 
 router.get('/new-user', 
-  dbController.createUser,
+  dbController.findLastNum,
   (req, res) => {
-    return res.status(200).json({});
+    return res.status(200).json(res.locals.newUserNum);
 })
 
 module.exports = router;
