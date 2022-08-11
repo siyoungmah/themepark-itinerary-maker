@@ -1,10 +1,22 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const mongoose = require('mongoose');
 
 const apiRouter = require('./routes/api.js');
+const { USERNAME, PASSWORD } = require('./login.js');
 
 const PORT = process.env.PORT || 3000;
+const MONGO_URI = `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.oxwvn7x.mongodb.net/?retryWrites=true&w=majority`;
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: 'solo_project'
+})
+  .then(() => console.log('Connected to MongoDB.'))
+  .catch((err) => console.log(err)
+);
 
 // handle parsing request body
 app.use(express.json());

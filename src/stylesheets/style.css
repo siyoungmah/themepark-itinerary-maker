@@ -114,7 +114,7 @@ select {
 #wait-time-box {
   background-color: rgb(208, 236, 208);
   color: white;
-  text-shadow: #092009 1px 0px 2px;
+  
   width: 80%;
   height: 6rem;
   display: flex;
