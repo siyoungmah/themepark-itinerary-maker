@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const apiRouter = require('./routes/api.js');
+const dbRouter = require('./routes/db.js');
 const { USERNAME, PASSWORD } = require('./login.js');
 
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use(express.static(path.resolve(__dirname, "../dist")))
 
 
 app.use('/api', apiRouter);
+app.use('/db', dbRouter);
 
 // global error handler
 app.use((err, req, res, next) => {

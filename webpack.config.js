@@ -54,6 +54,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/db/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
       '/stylesheets/**': {
         target: 'http://localhost:3000/',
         secure: false,
