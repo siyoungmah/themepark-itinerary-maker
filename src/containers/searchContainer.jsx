@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
+import WaitTimeDisplay from '../components/WaitTimeDisplay';
 
 const PARKS_NUM = 16; //from QueueTime API for Disneyland Park
 const locationByRideData = [];
@@ -105,9 +106,10 @@ const SearchContainer = (props) => {
         <DropdownMenu label={'location'} optionsArray={locationOptions} handleSelect={handleSelect} />
         <DropdownMenu label={'ride'} optionsArray={rideOptions} handleSelect={handleSelect} />
         <DropdownMenu label={'time'} optionsArray={timeOptions} handleSelect={handleSelect} closed={closed}/>
-        <div id='wait-time-box'>
+        <WaitTimeDisplay closed={closed}/>
+        {/* <div id='wait-time-box'>
           Wait time displays here!
-        </div>
+        </div> */}
         <div><button id='add-button'> Add to Itinerary</button></div>
     </div>
   );
