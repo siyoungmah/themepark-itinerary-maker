@@ -24,8 +24,9 @@ router.get('/',
 router.get('/new-user', 
   dbController.findLastNum,
   dbController.createUser,
+  cookieController.setSSIDCookie,
   (req, res) => {
-    return res.status(200).json(res.locals.ssid);
+    return res.status(200).json('You should have a cookie!');
 })
 
 module.exports = router;
