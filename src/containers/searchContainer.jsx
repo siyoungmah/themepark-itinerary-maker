@@ -6,7 +6,8 @@ const PARKS_NUM = 16; //from QueueTime API for Disneyland Park
 
 const SearchContainer = (props) => {
   // Declare a new state variable, which we'll call locations
-  const [locations, setLocations] = useState([]);
+  const [locationOptions, setLocationOptions] = useState([]);
+  const [location, setLocation] = useState('');
 
   // when this component renders, fetch location data in order to populate first
   // dropdown menu. Only do this when location
@@ -16,28 +17,35 @@ const SearchContainer = (props) => {
     console.log('SearchContainer\'s getLocation function has been invoked')
   }, []); // passing in an empty second parameter to ensure it only runs once, on component mount
 
+
   function getLocation(parksNum) {
     fetch(`/api/parks/${parksNum}/location`)
       .then(res => res.json())
       // this returns an array of object
       // with key "name" of each location and key "rides" with each rides
       .then(data => {
-        const locations = [];
+        const locationOptions = [];
         // traverse through the data received and add the name of each location into
         // the locations array. Then, update the locations array in the state.
         for (let i = 0; i < data.length; i++) {
-          locations.push(data[i].name);
+          locationOptions.push(data[i].name);
         }
-        setLocations(locations);
+        setLocationOptions(locationOptions);
       })
       .catch(err => console.log('getLocation: ERROR: ', err));
+  }
+
+  function handleSelect(input) {
+    setLocation(input);
   }
 
   return (
     <div id='searchContainer' className='container'>
       <ul id='searchList' className='list'>
         <li><h3>Search</h3></li>
-        <li><DropdownMenu label={'location'} locations={locations}/></li>
+        <li><DropdownMenu label={'location'} 
+              locationOptions={locationOptions}
+              handleSelect={handleSelect}/></li>
         <li className='dropdown-menu'><label htmlFor="ride-select">Ride: </label></li>
         <li className='dropdown-menu'><label htmlFor="time-select">Time: </label></li>
         <li><div id='wait-time-box'>
