@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
-import { getLocation } from '../../server/controllers/queueTimeController';
+import React, { useEffect, useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
 
 const PARKS_NUM = 16; //from QueueTime API for Disneyland Park
@@ -14,6 +13,7 @@ const SearchContainer = (props) => {
   const [waitTime, setWaitTime] = useState({});
   const [timeOptions, setTimeOptions] = useState([]);
   const [time, setTime] = useState('');
+  const [closed, setClosed] = useState(false);
 
 
   // when this component renders, fetch location data in order to populate first
@@ -34,6 +34,7 @@ const SearchContainer = (props) => {
   // when ride state gets changed, update dropdown menu for time!
   useEffect(() => {
     // add a function here to update ride dropdown menu
+    setClosed(false);
     getWaitTimes(ride);
     console.log('ride state has been updated');
   }, [ride]);
@@ -87,7 +88,7 @@ const SearchContainer = (props) => {
           setWaitTime(waitTime);
         }
         else {
-          setTimeOptions(['CLOSED - no available times']);
+          setClosed(true);
         }
       })
   }
@@ -100,22 +101,14 @@ const SearchContainer = (props) => {
 
   return (
     <div id='searchContainer' className='container'>
-      <ul id='searchList' className='list'>
-        <li><h3>Search</h3></li>
-        <li><DropdownMenu label={'location'}
-          optionsArray={locationOptions}
-          handleSelect={handleSelect} /></li>
-        <li><DropdownMenu label={'ride'}
-          optionsArray={rideOptions}
-          handleSelect={handleSelect} /></li>
-        <li><DropdownMenu label={'time'}
-          optionsArray={timeOptions}
-          handleSelect={handleSelect} /></li>
-        <li><div id='wait-time-box'>
+        <div><h3>Search</h3></div>
+        <DropdownMenu label={'location'} optionsArray={locationOptions} handleSelect={handleSelect} />
+        <DropdownMenu label={'ride'} optionsArray={rideOptions} handleSelect={handleSelect} />
+        <DropdownMenu label={'time'} optionsArray={timeOptions} handleSelect={handleSelect} closed={closed}/>
+        <div id='wait-time-box'>
           Wait time displays here!
-        </div></li>
-        <li><button id='add-button'> Add to Itinerary</button></li>
-      </ul>
+        </div>
+        <div><button id='add-button'> Add to Itinerary</button></div>
     </div>
   );
 }

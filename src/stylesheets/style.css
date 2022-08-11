@@ -44,6 +44,11 @@ ul {
 }
 
 #searchContainer {  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
   flex: 1;
   max-width: 360px;
   background-color: rgba(225, 226, 255, 0.725);
@@ -64,17 +69,11 @@ ul {
   align-items: stretch;
 }
 
-#searchList li {
-  margin: 1em 0;
-}
 
 .dropdown-menu {
   padding-left: 12px;
 }
 
-li > h3 {
-  text-align: center;
-}
 #itineraryBox {
   overflow: auto;
   margin: auto;
@@ -87,7 +86,6 @@ li > h3 {
   background-color: rgb(208, 236, 208);
   width: 80%;
   height: 5em;
-  margin: auto;
 }
 
 #itinerary-button-container {
