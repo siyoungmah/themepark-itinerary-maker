@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component , useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
 
 const PARKS_NUM = 16; //from QueueTime API for Disneyland Park
