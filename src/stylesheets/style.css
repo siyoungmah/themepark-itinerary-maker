@@ -8,7 +8,7 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
-  background-image: url('https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/90/media/disneyparksjapan-prod/disneyparksjapan_v0001/1/media/dlr/homepage/billboard/dlr-dca-vignette-16x9.jpg');
+  background-image: url('https://thekingdominsider.com/wp-content/uploads/2020/04/DLR_DCA_vignette_web.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -16,15 +16,24 @@ body {
 header {
   /* flex-grow: 1; */
   height: 120px;
-  background-color: rgba(255, 255, 255, 0.725);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5% 10% 0 10%;
 }
 
 header h1 {
+  width: 100%;
+  height: 100%;
+  text-align: center;
   color: rgb(40, 1, 40);
-  margin: auto;
   font-family: 'Patrick Hand SC', cursive, sans-serif;
   font-size: 52px;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 main {
@@ -40,7 +49,10 @@ ul {
 
 #mainContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: 50px;
+  padding: 10%;
+  padding-top: 5%;
 }
 
 #searchContainer {  
@@ -49,14 +61,15 @@ ul {
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
+  padding: 16px;
   flex: 1;
   max-width: 360px;
-  background-color: rgba(225, 226, 255, 0.725);
+  background-color: whitesmoke;
 }
 
 #itineraryContainer {
-  flex: 3;
-  background-color: rgba(255, 228, 228, 0.725);
+  flex: 2;
+  background-color: whitesmoke;
 }
 
 .list {
