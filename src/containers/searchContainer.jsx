@@ -27,16 +27,25 @@ const SearchContainer = (props) => {
   }, []); // passing in an empty second parameter to ensure it only runs once, on component mount
 
   // when location state gets changed, update dropdown menu for attractions!
+  // initialize all other states
   useEffect(() => {
+    setRide('');
+    setRideOptions([]);
+    setTime('');
+    setTimeOptions([]);
+    setWaitTimeOptions({});
+    setWaitTime('');
     // add a function here to update ride dropdown menu
     getRideByLocation(location);
-    console.log('location state has been updated');
+    console.log('location state changed and rides have been updated');
   }, [location]);
 
   // when ride state gets changed, update dropdown menu for time!
   useEffect(() => {
     // add a function here to update ride dropdown menu
     setClosed(false);
+    setWaitTime('');
+    setWaitTimeOptions([]);
     getWaitTimes(ride);
     console.log('ride state has been updated');
   }, [ride]);
@@ -113,6 +122,7 @@ const SearchContainer = (props) => {
         <DropdownMenu label={'time'} optionsArray={timeOptions} handleSelect={handleSelect} closed={closed}/>
         <WaitTimeDisplay waitTime = {waitTime} closed={closed}/>
         <div><button id='add-button'> Add to Itinerary</button></div>
+        <img src="https://i.pinimg.com/originals/2e/31/9a/2e319a0ba80802f9615516b52ef989d7.png" alt="" />
     </div>
   );
 }

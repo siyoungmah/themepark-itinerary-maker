@@ -3,6 +3,7 @@
 html, body {
   height: 100%;
   width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -67,6 +68,22 @@ ul {
   background-color: whitesmoke;
 }
 
+#searchContainer img {
+  width: 80%;
+  height: auto;
+  margin-top: auto;
+}
+
+.dropdown-div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+select {
+  width: 70%;
+}
+
 #itineraryContainer {
   flex: 2;
   background-color: whitesmoke;
@@ -83,22 +100,29 @@ ul {
 }
 
 
-.dropdown-menu {
-  padding-left: 12px;
-}
-
 #itineraryBox {
   overflow: auto;
   margin: auto;
   height: 50vh;
   width: 80%;
   background-color: rgb(227, 215, 188);
+  border: ridge;
+  border-width: 5px;
+  padding: 12px;
 }
 
 #wait-time-box {
   background-color: rgb(208, 236, 208);
+  color: white;
+  text-shadow: #092009 1px 0px 2px;
   width: 80%;
-  height: 5em;
+  height: 6rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: ridge;
+  border-width: 5px;
 }
 
 #itinerary-button-container {
