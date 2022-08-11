@@ -1,20 +1,20 @@
 const fetch = require('node-fetch');
 
-const queueTimeController = {};
+const queuetimeController = {};
 
-// helper function to create queueTimeController error objects
+// helper function to create queuetimeController error objects
 // return value will be the object we pass into next, invoking global error handler
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo; // this is a destructuring assignment
   return {
-    log: `queueController.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
-    message: { err: `Error occurred in queueController.${method}. Check server logs for more details.` }
+    log: `queuetimeController.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+    message: { err: `Error occurred in queuetimeController.${method}. Check server logs for more details.` }
   };
 }; 
 
 // Middleware to get attraction type information
 // router get path: router.get('/parks/:parksNum/type',
-queueTimeController.getLocation = (req, res, next) => {
+queuetimeController.getLocation = (req, res, next) => {
   const parksNum = req.params.parksNum;
   fetch(`https://queue-times.com/en-US/parks/${parksNum}/queue_times.json`)
   .then(data => data.json())
@@ -46,4 +46,4 @@ queueTimeController.getLocation = (req, res, next) => {
   })));
 }
 
-module.exports = queueTimeController;
+module.exports = queuetimeController;

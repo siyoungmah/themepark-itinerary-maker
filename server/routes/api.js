@@ -1,7 +1,8 @@
 const express = require('express');
 const fetch = require('node-fetch');
 
-const queueTimeController = require('../controllers/queueTimeController.js');
+const queuetimeController = require('../controllers/queueTimeController.js');
+const themeparksController = require('../controllers/themeparksController.js') 
 
 const router = express.Router();
 
@@ -36,9 +37,15 @@ router.get('/parks',
 );
 
 router.get('/parks/:parksNum/location', 
-  queueTimeController.getLocation,
+  queuetimeController.getLocation,
   (req, res) => {
     return res.status(200).json(res.locals.locations);
   });
 
+router.get('/parks/:rideName/wait-times',
+  themeparksController.getWaitTimes,
+  (req, res) => {
+    return res.status(200).json(res.locals.waitTimes);
+  }
+)
 module.exports = router;
