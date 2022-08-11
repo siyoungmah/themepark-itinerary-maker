@@ -13,7 +13,8 @@ const SearchContainer = (props) => {
   useEffect(() => {
     //fetch from api/parks/parksNum/location in order to update this.state
     getLocation(PARKS_NUM);
-  }, [locations]);
+    console.log('SearchContainer\'s getLocation function has been invoked')
+  }, []); // passing in an empty second parameter to ensure it only runs once, on component mount
 
   function getLocation(parksNum) {
     fetch(`/api/parks/${parksNum}/location`)
@@ -36,7 +37,7 @@ const SearchContainer = (props) => {
     <div id='searchContainer' className='container'>
       <ul id='searchList' className='list'>
         <li><h3>Search</h3></li>
-        <li><DropdownMenu /></li>
+        <li><DropdownMenu label={'location'} locations={locations}/></li>
         <li className='dropdown-menu'><label htmlFor="ride-select">Ride: </label></li>
         <li className='dropdown-menu'><label htmlFor="time-select">Time: </label></li>
         <li><div id='wait-time-box'>

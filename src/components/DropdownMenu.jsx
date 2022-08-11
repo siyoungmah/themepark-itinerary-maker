@@ -1,18 +1,32 @@
 import React from 'react';
 
 const DropdownMenu = (props) => {
-  const optionsArray = [];
+  const options = [
+    <option value="">--Please chose a {props.label}--</option>
+  ];
+  for(let i = 0; i < props.locations.length; i++){
+    options.push(
+      <option value={props.locations[i]}>{props.locations[i]}</option>
+    );
+  }
 
   return (
     <div className='dropdown-div'>
-      <label htmlFor="location-select">Location: </label>
-      <select name="location" id="location-select">
-        <option value="">--Please choose a location--</option>
-        <option value="Fantasyland">Fantasyland</option>
-        {/* somehow need to use an array iteration to populate these options and values */}
+      <label htmlFor={props.label + "-select"}>{props.label.slice(0,1).toUpperCase() + props.label.slice(1) + ": "}</label>
+      <select name={props.label} id={props.label + "-select"}>
+        {options}
       </select>
     </div>
   );
 }
+
+// return (
+//   <div className='dropdown-div'>
+//     <label htmlFor={props.label + "-select"}>{props.label.slice(0,1).toUpperCase() + props.label.slice(1)+': '}</label>
+//     <select name={props.label} id={props.label + "-select"}>
+//       {options}
+//     </select>
+//   </div>
+// );
 
 export default DropdownMenu;
