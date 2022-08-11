@@ -3,11 +3,15 @@ import { getLocation } from '../../server/controllers/queueTimeController';
 import DropdownMenu from '../components/DropdownMenu';
 
 const PARKS_NUM = 16; //from QueueTime API for Disneyland Park
+const locationByRideData = [];
 
 const SearchContainer = (props) => {
   // Declare a new state variable, which we'll call locations
   const [locationOptions, setLocationOptions] = useState([]);
   const [location, setLocation] = useState('');
+  const [rideOptions, setRideOptions] = useState([]);
+  const [ride, setRide] = useState('');
+
 
   // when this component renders, fetch location data in order to populate first
   // dropdown menu. Only do this when location
@@ -20,6 +24,7 @@ const SearchContainer = (props) => {
   // when location state gets changed, update dropdown menu for attractions!
   useEffect(() => {
     // add a function here to update ride dropdown menu
+    getRideByLocation(location);
     console.log('location state has been updated');
   }, [location])
 
@@ -29,19 +34,33 @@ const SearchContainer = (props) => {
       // this returns an array of object
       // with key "name" of each location and key "rides" with each rides
       .then(data => {
+        // iterate through the returned data
         const locationOptions = [];
-        // traverse through the data received and add the name of each location into
-        // the locations array. Then, update the locations array in the state.
-        for (let i = 0; i < data.length; i++) {
+        for(let i = 0; i < data.length; i++){
+          locationByRideData.push(data[i]);
           locationOptions.push(data[i].name);
         }
+        // console.log(locationByRideData);
         setLocationOptions(locationOptions);
       })
       .catch(err => console.log('getLocation: ERROR: ', err));
   }
 
-  function handleSelect(input) {
-    setLocation(input);
+  function getRideByLocation(loc) {
+    const rideOptions = [];
+    console.log(locationByRideData);
+    for (let i = 0; i < locationByRideData.length; i++){
+      if(loc && (loc === locationByRideData[i].name || loc === 'Include all')){
+        rideOptions.push(...locationByRideData[i].rides);
+      }
+    }
+    // console.log(rideOptions);
+    setRideOptions(rideOptions);
+  }
+
+  function handleSelect(label, input) {
+    if(label === 'location') setLocation(input);
+    if(label === 'ride') setRide(input);
   }
 
   return (
@@ -49,9 +68,11 @@ const SearchContainer = (props) => {
       <ul id='searchList' className='list'>
         <li><h3>Search</h3></li>
         <li><DropdownMenu label={'location'} 
-              locationOptions={locationOptions}
+              optionsArray={locationOptions}
               handleSelect={handleSelect}/></li>
-        <li className='dropdown-menu'><label htmlFor="ride-select">Ride: </label></li>
+        <li><DropdownMenu label={'ride'} 
+              optionsArray={rideOptions}
+              handleSelect={handleSelect}/></li>
         <li className='dropdown-menu'><label htmlFor="time-select">Time: </label></li>
         <li><div id='wait-time-box'>
           Wait time displays here!
