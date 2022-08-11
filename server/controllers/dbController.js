@@ -16,8 +16,13 @@ dbController.findLastNum = (req, res, next) => {
 
 dbController.createUser = (req, res, next) => {
   User.create({
-
+    userNum: res.locals.userNum,
   })
+  .then(data => {
+    res.locals.ssid = data.id;
+    return next();
+  })
+  .catch((err) => next({message: {error: 'createUser Error!'}, log: err}));
 };
 
 module.exports = dbController;

@@ -20,10 +20,12 @@ router.get('/',
     return res.status(200).json({message: 'db router is working!'});
 });
 
+// verification that this is indeed a new-user is needed!
 router.get('/new-user', 
   dbController.findLastNum,
+  dbController.createUser,
   (req, res) => {
-    return res.status(200).json(res.locals.newUserNum);
+    return res.status(200).json(res.locals.ssid);
 })
 
 module.exports = router;
