@@ -11,8 +11,11 @@ const WaitTimeDisplay = (props) => {
     bgStyle.color = "#092009"
   } 
 
+  let text = 'Please choose your search parameters to see an estimate wait time.';
+  if(props.waitTime) text = props.waitTime + " min";
+
   return (
-    <div id='wait-time-box' style={bgStyle}>{props.waitTime}</div>
+    <div id='wait-time-box' style={bgStyle}>{text}</div>
   );
 }
 
