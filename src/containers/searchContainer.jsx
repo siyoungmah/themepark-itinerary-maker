@@ -11,6 +11,9 @@ const SearchContainer = (props) => {
   const [location, setLocation] = useState('');
   const [rideOptions, setRideOptions] = useState([]);
   const [ride, setRide] = useState('');
+  const [waitTime, setWaitTime] = useState({});
+  const [timeOptions, setTimeOptions] = useState([]);
+  const [time, setTime] = useState('');
 
 
   // when this component renders, fetch location data in order to populate first
@@ -26,7 +29,14 @@ const SearchContainer = (props) => {
     // add a function here to update ride dropdown menu
     getRideByLocation(location);
     console.log('location state has been updated');
-  }, [location])
+  }, [location]);
+
+  // when ride state gets changed, update dropdown menu for time!
+  useEffect(() => {
+    // add a function here to update ride dropdown menu
+    getWaitTimes(ride);
+    console.log('ride state has been updated');
+  }, [ride]);
 
   function getLocation(parksNum) {
     fetch(`/api/parks/${parksNum}/location`)
@@ -36,7 +46,7 @@ const SearchContainer = (props) => {
       .then(data => {
         // iterate through the returned data
         const locationOptions = [];
-        for(let i = 0; i < data.length; i++){
+        for (let i = 0; i < data.length; i++) {
           locationByRideData.push(data[i]);
           locationOptions.push(data[i].name);
         }
@@ -46,11 +56,11 @@ const SearchContainer = (props) => {
       .catch(err => console.log('getLocation: ERROR: ', err));
   }
 
+  // given a location, returns an array of rides available
   function getRideByLocation(loc) {
     const rideOptions = [];
-    console.log(locationByRideData);
-    for (let i = 0; i < locationByRideData.length; i++){
-      if(loc && (loc === locationByRideData[i].name || loc === 'Include all')){
+    for (let i = 0; i < locationByRideData.length; i++) {
+      if (loc && (loc === locationByRideData[i].name || loc === 'Include all')) {
         rideOptions.push(...locationByRideData[i].rides);
       }
     }
@@ -58,22 +68,49 @@ const SearchContainer = (props) => {
     setRideOptions(rideOptions);
   }
 
+  // given a ride, returns options for times and wait time accordingly
+  function getWaitTimes(ride) {
+    const timeOptions = [];
+    const waitTime = {};
+    const rideName = ride.replace(/\s/g, '-').toLowerCase(); //replace spaces with -
+    fetch(`api/parks/${rideName}/wait-times`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'OPERATING') {
+          for (let i = 0; i < data.forecast.length; i++) {
+            const startHour = parseInt(data.forecast[i].time.slice(11, 13));
+            const timeString = `${startHour}:00 - ${startHour + 1}:00`;
+            timeOptions.push(timeString);
+            waitTime[timeString] = data.forecast[i].waitTime;
+          }
+          setTimeOptions(timeOptions);
+          setWaitTime(waitTime);
+        }
+        else {
+          setTimeOptions(['CLOSED - no available times']);
+        }
+      })
+  }
+
   function handleSelect(label, input) {
-    if(label === 'location') setLocation(input);
-    if(label === 'ride') setRide(input);
+    if (label === 'location') setLocation(input);
+    if (label === 'ride') setRide(input);
+    if (label === 'time') setTime(input);
   }
 
   return (
     <div id='searchContainer' className='container'>
       <ul id='searchList' className='list'>
         <li><h3>Search</h3></li>
-        <li><DropdownMenu label={'location'} 
-              optionsArray={locationOptions}
-              handleSelect={handleSelect}/></li>
-        <li><DropdownMenu label={'ride'} 
-              optionsArray={rideOptions}
-              handleSelect={handleSelect}/></li>
-        <li className='dropdown-menu'><label htmlFor="time-select">Time: </label></li>
+        <li><DropdownMenu label={'location'}
+          optionsArray={locationOptions}
+          handleSelect={handleSelect} /></li>
+        <li><DropdownMenu label={'ride'}
+          optionsArray={rideOptions}
+          handleSelect={handleSelect} /></li>
+        <li><DropdownMenu label={'time'}
+          optionsArray={timeOptions}
+          handleSelect={handleSelect} /></li>
         <li><div id='wait-time-box'>
           Wait time displays here!
         </div></li>
