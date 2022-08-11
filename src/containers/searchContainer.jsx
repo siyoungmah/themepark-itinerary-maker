@@ -11,9 +11,10 @@ const SearchContainer = (props) => {
   const [location, setLocation] = useState('');
   const [rideOptions, setRideOptions] = useState([]);
   const [ride, setRide] = useState('');
-  const [waitTime, setWaitTime] = useState({});
   const [timeOptions, setTimeOptions] = useState([]);
   const [time, setTime] = useState('');
+  const [waitTimeOptions, setWaitTimeOptions] = useState({});
+  const [waitTime, setWaitTime] = useState('');
   const [closed, setClosed] = useState(false);
 
 
@@ -73,7 +74,7 @@ const SearchContainer = (props) => {
   // given a ride, returns options for times and wait time accordingly
   function getWaitTimes(ride) {
     const timeOptions = [];
-    const waitTime = {};
+    const waitTimeOptions = {};
     const rideName = ride.replace(/\s/g, '-').toLowerCase(); //replace spaces with -
     fetch(`api/parks/${rideName}/wait-times`)
       .then(res => res.json())
@@ -83,10 +84,10 @@ const SearchContainer = (props) => {
             const startHour = parseInt(data.forecast[i].time.slice(11, 13));
             const timeString = `${startHour}:00 - ${startHour + 1}:00`;
             timeOptions.push(timeString);
-            waitTime[timeString] = data.forecast[i].waitTime;
+            waitTimeOptions[timeString] = data.forecast[i].waitTime;
           }
           setTimeOptions(timeOptions);
-          setWaitTime(waitTime);
+          setWaitTimeOptions(waitTimeOptions);
         }
         else {
           setClosed(true);
@@ -97,7 +98,11 @@ const SearchContainer = (props) => {
   function handleSelect(label, input) {
     if (label === 'location') setLocation(input);
     if (label === 'ride') setRide(input);
-    if (label === 'time') setTime(input);
+    if (label === 'time') {
+      // when a time is selected, derive the wait time
+      setWaitTime(waitTimeOptions[input]);
+      setTime(input);
+    }
   }
 
   return (
@@ -106,10 +111,7 @@ const SearchContainer = (props) => {
         <DropdownMenu label={'location'} optionsArray={locationOptions} handleSelect={handleSelect} />
         <DropdownMenu label={'ride'} optionsArray={rideOptions} handleSelect={handleSelect} />
         <DropdownMenu label={'time'} optionsArray={timeOptions} handleSelect={handleSelect} closed={closed}/>
-        <WaitTimeDisplay closed={closed}/>
-        {/* <div id='wait-time-box'>
-          Wait time displays here!
-        </div> */}
+        <WaitTimeDisplay waitTime = {waitTime} closed={closed}/>
         <div><button id='add-button'> Add to Itinerary</button></div>
     </div>
   );

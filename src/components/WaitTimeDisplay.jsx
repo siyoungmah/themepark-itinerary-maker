@@ -12,9 +12,7 @@ const WaitTimeDisplay = (props) => {
   } 
 
   return (
-    <div id='wait-time-box' style={bgStyle}>
-          Wait time displays here!
-    </div>
+    <div id='wait-time-box' style={bgStyle}>{props.waitTime}</div>
   );
 }
 
