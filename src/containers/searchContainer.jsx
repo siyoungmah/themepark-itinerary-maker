@@ -17,6 +17,11 @@ const SearchContainer = (props) => {
     console.log('SearchContainer\'s getLocation function has been invoked')
   }, []); // passing in an empty second parameter to ensure it only runs once, on component mount
 
+  // when location state gets changed, update dropdown menu for attractions!
+  useEffect(() => {
+    // add a function here to update ride dropdown menu
+    console.log('location state has been updated');
+  }, [location])
 
   function getLocation(parksNum) {
     fetch(`/api/parks/${parksNum}/location`)
