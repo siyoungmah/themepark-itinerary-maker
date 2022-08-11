@@ -1,17 +1,18 @@
 import React from 'react';
-import { ProgressPlugin } from 'webpack';
 
 const DropdownMenu = (props) => {
   const optionsArray = [];
-  
-  <div className='dropdown-div'>
-    <label htmlFor="location-select">Location: </label>
-    <select name="location" id="location-select">
-      <option value="">--Please choose a location--</option>
-      <option value="Fantasyland">Fantasyland</option>
-      {/* somehow need to use an array iteration to populate these options and values */}
-    </select>
-  </div>
+
+  return (
+    <div className='dropdown-div'>
+      <label htmlFor="location-select">Location: </label>
+      <select name="location" id="location-select">
+        <option value="">--Please choose a location--</option>
+        <option value="Fantasyland">Fantasyland</option>
+        {/* somehow need to use an array iteration to populate these options and values */}
+      </select>
+    </div>
+  );
 }
 
 export default DropdownMenu;

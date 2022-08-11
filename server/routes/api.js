@@ -35,7 +35,7 @@ router.get('/parks',
   }
 );
 
-router.get('/parks/:parksNum/type', 
+router.get('/parks/:parksNum/location', 
   queueTimeController.getLocation,
   (req, res) => {
     return res.status(200).json(res.locals.locations);
