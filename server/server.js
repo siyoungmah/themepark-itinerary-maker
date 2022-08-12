@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const apiRouter = require('./routes/api.js');
 const dbRouter = require('./routes/db.js');
@@ -21,6 +22,8 @@ mongoose.connect(MONGO_URI, {
 
 // handle parsing request body
 app.use(express.json());
+app.use(cookieParser());
+
 
 // handle requests for static files for css styling, index.html and bundle.js
 app.use(express.static(path.join(__dirname, "../src")));

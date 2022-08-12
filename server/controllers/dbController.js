@@ -4,10 +4,10 @@ const dbController = {};
 
 dbController.findLastNum = (req, res, next) => {
   User.findOne()
-    // .sort({ userNum: 'desc'})
+    .sort({ userNum: 'desc'})
     .exec((err, users) => {
     if (err) return next('Error in dbController.findLastNums: ' + JSON.stringify(err));
-    console.log('users returns: ', users);
+    console.log('New User Num is: ', users.userNum);
     if(users === null) res.locals.userNum = 1;
     else res.locals.userNum = users.userNum + 1;
     return next();

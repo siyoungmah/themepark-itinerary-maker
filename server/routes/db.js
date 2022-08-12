@@ -29,4 +29,14 @@ router.get('/new-user',
     return res.status(200).json('You should have a cookie!');
 })
 
+// load saved itineraries if the user already has a cookie
+router.get('/load',
+  cookieController.verifyReturningUser,
+  (req, res) => {
+    if(res.locals.verifiedUser)
+      return res.status(200).json('Hey, we recognize you! You should have a saved itinerary loading... sooon....');
+    else return res.status(204).redirect('new-user');
+  }
+)
+
 module.exports = router;
