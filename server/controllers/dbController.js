@@ -1,4 +1,5 @@
-const User = require('../models/userModels');
+const User = require('../models/userModel');
+const Itinerary = require('../models/itineraryModel');
 
 const dbController = {};
 
@@ -18,8 +19,16 @@ dbController.createUser = (req, res, next) => {
   User.create({
     userNum: res.locals.userNum,
   })
-  .then(data => {
-    res.locals.ssid = data.id;
+  .then(user => {
+    // console.log('what do you return after you create? ', user); // returns the create document
+    // Once a user is created, also create an associated Itinerary with it
+    // link up the itinerary and user with each other
+    Itinerary.create({
+      userID: user._id,
+      itineraryObject: {},
+    }).then((itinerary) =>
+      user.updateOne({itinerary_id: itinerary._id}).exec());
+    res.locals.ssid = user.id;
     return next();
   })
   .catch((err) => next({message: {error: 'createUser Error!'}, log: err}));

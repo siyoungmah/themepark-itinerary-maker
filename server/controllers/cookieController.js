@@ -1,5 +1,5 @@
 const cookieController = {};
-const User = require('../models/userModels.js');
+const User = require('../models/userModel.js');
 
 cookieController.setSSIDCookie = (req, res, next) => {
   res.cookie('ssid', res.locals.ssid, { httpOnly: true });
