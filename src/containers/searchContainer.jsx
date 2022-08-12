@@ -114,6 +114,16 @@ const SearchContainer = (props) => {
     }
   }
 
+  // this needs to communicate between search container and itinerary container
+  // package relevant information and send it over to itinerary container
+  function createCard(){
+    if(waitTime !== ""){
+      const cardInfo = { time, waitTime, name: ride, location };
+      console.log(cardInfo);
+    }
+    console.log('Button has been clicked!');
+  }
+
   return (
     <div id='searchContainer' className='container'>
         <div><h3>Search</h3></div>
@@ -121,7 +131,7 @@ const SearchContainer = (props) => {
         <DropdownMenu label={'ride'} optionsArray={rideOptions} handleSelect={handleSelect} />
         <DropdownMenu label={'time'} optionsArray={timeOptions} handleSelect={handleSelect} closed={closed}/>
         <WaitTimeDisplay waitTime = {waitTime} closed={closed}/>
-        <div><button id='add-button'> Add to Itinerary</button></div>
+        <div><button id='add-button' onClick={createCard}> Add to Itinerary</button></div>
         <img src="https://i.pinimg.com/originals/2e/31/9a/2e319a0ba80802f9615516b52ef989d7.png" alt="" />
     </div>
   );

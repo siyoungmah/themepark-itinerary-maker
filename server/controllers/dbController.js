@@ -43,13 +43,13 @@ dbController.fetchItinerary = (req, res, next) => {
       Itinerary.findById(itineraryID).exec()
         .then(itineraryDoc =>{
           console.log('in fetchItinerary, here is the itinerary document: ', itineraryDoc);
-          if(itineraryDoc.itineraryObject){
-            console.log('We have an itinerary object!');
-            res.locals.itinerary = itineraryDoc.itineraryObject;
-          }
-          else{
+          if(!itineraryDoc || !itineraryDoc.itineraryObject){
             console.log('There is no itinerary object')
             res.locals.itinerary = {};
+          }
+          else{
+            console.log('We have an itinerary object!');
+            res.locals.itinerary = itineraryDoc.itineraryObject;
           } 
           return next();
         })
