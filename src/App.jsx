@@ -14,8 +14,10 @@ class App extends Component {
   }
 
   // when website loads, populate the dropdown menus
-  componentDidMount(){
-
+  componentDidMount(){  
+    fetch('/db/load')
+      .then(() => console.log('cookie received!'))
+      .catch((err) => console.log('Error! Error: ', err));
   }
 
   render() {
