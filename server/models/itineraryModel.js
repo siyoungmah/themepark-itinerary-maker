@@ -6,7 +6,7 @@ const itinerarySchema = new Schema({
     type: Schema.Types.ObjectId, 
     required: true,
     ref: 'user'},
-  itineraryObject: {type: Object, required: true},
+  itineraryObject: Object,
 });
 
 const Itinerary = mongoose.model('itinerary', itinerarySchema);
